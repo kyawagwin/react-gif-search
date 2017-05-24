@@ -16,11 +16,13 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <div className="ui input search-bar">
-        <input 
-          type="text" 
-          placeholder="Search..."
-          onChange={this.handleInputChange} />
+      <div className="ui container">
+        <div className="ui input search-bar">
+          <input 
+            type="text" 
+            placeholder="Search..."
+            onChange={this.handleInputChange} />
+        </div>
       </div>
     );
   }

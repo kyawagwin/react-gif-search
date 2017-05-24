@@ -3,6 +3,7 @@ import request from 'superagent';
 
 import SearchBar from './components/SearchBar';
 import GifList from './components/GifList';
+import GifModal from './components/GifModal';
 
 import './App.css';
 
@@ -10,8 +11,24 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gifs: []
+      gifs: [],
+      selectedGif: null,
+      modalIsOpen: false
     }
+  }
+
+  openModal(gif) {
+    this.setState({
+      modalIsOpen: true,
+      selectedGif: gif
+    });
+  }
+
+  closeModal() {
+    this.setState({
+      modalIsOpen: false,
+      selectedGif: null
+    });
   }
 
   handleTermChange = (term) => {
@@ -26,7 +43,13 @@ class App extends Component {
     return (
       <div className="ui container app">
         <SearchBar onTermChange={ this.handleTermChange } />
-        <GifList gifs={this.state.gifs} />
+        <GifList 
+          gifs={this.state.gifs}
+          onGifSelect={ selectedGif => this.openModal(selectedGif) } />
+        <GifModal 
+          modalIsOpen={ this.state.modalIsOpen }
+          selectedGif={ this.state.selectedGif }
+          onRequestClose={ () => this.closeModal() } />
       </div>
     );
   }

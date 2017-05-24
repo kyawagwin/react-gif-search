@@ -6,7 +6,12 @@ import './GifList.css';
 
 const GifList = (props) => {
   const gifItems = props.gifs.map((gif) => {
-    return <GifItem key={ gif.id } gif={ gif } />
+    return (
+      <GifItem 
+        key={ gif.id } 
+        gif={ gif }
+        onGifSelect={ props.onGifSelect } />
+    );
   });
 
   return (
